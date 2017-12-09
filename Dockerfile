@@ -10,3 +10,10 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
 # install nitro-generator deps
+RUN npm install -g yarn yo generator-nitro
+
+# create user for yeoman
+RUN useradd --create-home --shell /bin/bash namics && usermod -aG sudo namics
+
+# set actual user 
+USER namics
