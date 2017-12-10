@@ -1,0 +1,11 @@
+version: '0.1'
+services:
+  development:
+    build: ./
+    dockerfile: Dockerfile
+    working_dir: '/home/namics'
+    ports: 
+      - '8080:8080'
+    entrypoint: npm run dev
+    volumes:
+      - /Users/dada/Documents/exampleNitroProject:/home/namics
