@@ -3,9 +3,17 @@ services:
   development:
     build: ./
     dockerfile: Dockerfile
-    working_dir: '/home/namics'
-    ports: 
-      - '8080:8080'
     entrypoint: npm run dev
+    ports:
+      - '8080:8080'
+      - '8081:8081'
+      - '3001:3001'
     volumes:
-      - /Users/dada/Documents/exampleNitroProject:/home/namics
+      - ./example_project:/home/namics
+      - /home/namics/node_modules
+      - /home/namics/app
+      - /home/namics/config
+      - /home/namics/gulp
+      - /home/namics/project
+      - /home/namics/tests
+      - /home/namics/node_modules/node-sass/vendor

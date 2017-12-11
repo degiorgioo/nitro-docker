@@ -15,8 +15,20 @@ RUN npm install -g yarn yo generator-nitro
 # create user for yeoman
 RUN useradd --create-home --shell /bin/bash namics && usermod -aG sudo namics
 
-# set actual user 
-USER namics
+RUN apt-get install -y libpng-dev
 
-# create home directory
+# set actual user 
+
+ADD ./nitro/package.json /home/namics
+ADD ./nitro/gulpfile.js /home/namics
+ADD ./nitro/gulp /home/namics/gulp
+ADD ./nitro/config /home/namics/config
+ADD ./nitro/app /home/namics/app
+ADD ./nitro/tests /home/namics/tests
+ADD ./nitro/project /home/namics/project
+
 WORKDIR /home/namics
+
+RUN npm install
+
+ADD . ./example_project

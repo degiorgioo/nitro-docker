@@ -1,0 +1,20 @@
+{
+  "generator-nitro": {
+    "promptValues": {
+      "pre": "scss",
+      "viewExt": "hbs",
+      "clientTpl": false,
+      "exampleCode": true,
+      "exporter": false,
+      "release": false
+    },
+    "name": "example_project",
+    "preprocessor": "scss",
+    "jscompiler": "JavaScript",
+    "viewExtension": "hbs",
+    "clientTemplates": false,
+    "exampleCode": true,
+    "exporter": false,
+    "release": false
+  }
+}
