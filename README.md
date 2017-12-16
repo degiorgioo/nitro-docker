@@ -29,9 +29,28 @@ The Docker Image is based on the latest Ubuntu and has the following packages in
 │   ├── tests --> nitro 'tests' folder
 │   ├── gulp --> nitro 'gulp' folder
 │   ├── projects --> nitro 'projetcs' folder
-│   ├── src --> nitro 'src' folder
-│   ├── public --> nitro 'public' folder
+│   ├── src --> folder for the develop
+│   ├── public --> folder for the assets
 │   └── package.json --> DevDependencies for the applicaton
 ```
 ## Summary
-During buildtime all needed folders of the nitro generator are copied in the container itself. After copy all need files, the npm command is exectued to install all dependencies for the project. This are all described in the package.json copied from the nitro generator. 
+During buildtime all needed folders of the nitro generator are copied in the container itself. The main purpose for the container should be, to set the enivornment for the developers. The architecture for the application and all needed files for builing and developing the application should be in it. The Developer is not responsible for the environment but the container should give them the opportunity to develop the application. 
+
+## Docker-compose
+To run the container the docker-compose helper is used. This file maps all folders for the development and expose all needed ports.
+
+# Start developing
+The structure of the project is organized as following:
+```
+project-folder/
+├── .
+│   ├── nitro --> All nitro files
+│   └── project --> All development files
+```
+In the folder named 'project', all files for the application should be placed in. When the container starts, it runs the command ```npm run dev```, which watches all the files in this folder.
+
+When all needed files are in in it, the following command can be used to starts the system:
+
+```
+docker-compose up
+```
