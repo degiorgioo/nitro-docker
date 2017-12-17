@@ -36,7 +36,7 @@ The Docker Image is based on the latest Ubuntu and has the following packages in
 ## Summary
 During buildtime all needed folders of the nitro generator are copied in the container itself. The main purpose for the container should be, to set the enivornment for the developers. The architecture for the application and all needed files for builing and developing the application should be in it. The Developer is not responsible for the environment but the container should give them the opportunity to develop the application. 
 
-## Docker-compose
+## Docker-compose
 To run the container the docker-compose helper is used. This file maps all folders for the development and expose all needed ports.
 
 # Start developing
