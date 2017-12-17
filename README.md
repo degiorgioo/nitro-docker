@@ -1,13 +1,35 @@
 # Generator Nitro meets Docker
-This Repository was created for a practical training in the Namics office located in Zurich. The main purpose of this project, is to outsource the nitro generator (https://github.com/namics/generator-nitro). 
+This Repository was created for a practical training in the Namics office located in Zurich. The main purpose of this project, is to outsource the nitro generator (https://github.com/namics/generator-nitro) to a Docker container. 
 
-# Division of Concern
-## Architecture
-In my opinion the Developer shouldn't waste time to build the architecture of the Frontend Development environemnt. This should be done by an experienced Frontend Architect, who knows what technolgies should be used. In this case, the artchitect is responsible for the creation of Docker Image.
+# Roles
+Before we start to describe the purpose and all things about this project, it's important to describe the roles of this new working procedure.
 
-## Sourcecode
-What is the most important thing for a Software Engineer? The Sourceode. Thus he / she should only be responsible for Sourcecode. 
+![Project Roles](./documentation/roles.png "Roles")
 
+## Architect
+In my opinion the Software architect has the responsability to determine the technologies and to design the architecture of the Software. This means that the architect has the responsibility to create the Docker container for the project. Following the procedure of the architect is described:
+
+1. Generate the project with the yeoman nitro-generator.
+2. Divide the the Nitro folders, from the sourcecode folders.
+2.1 Copy the Nitro stuff into the ```nitro```folder.
+3. Give the developers the opportunity to work. E.g: Mount folders, etc.
+
+## Developer
+The Developer has only the responsability to develop the Software. The Developer do not worry about how the architecture was built. The most important thing is that, he / she knows the structure of the architecture and how to work with it. The developers binds the folder of the sourcecode with the folders in the docker container.
+
+# Folder structure
+This project has a special folder structure, which was created to optimize the work from the architect. 
+```
+project-folder/
+├── .
+│   ..
+│   ├── nitro --> Nitro stuff
+│   ├── project --> Sourcecode folder for the developers
+│   ├── config --> nitro 'config' folder
+│   ├── Docker-compose.yml --> Docker-compose file for run/build docker
+│   ├── Dockerfile --> Dockerfile which describe the Docker image
+```
+How described in the previous section, the architect generates a project with the nitro-generator. This Nitro files are copied in the ```nitro``` folder and copied during buildtime into the docker-container.
 
 # Docker Image
 ## Packages
@@ -19,38 +41,19 @@ The Docker Image is based on the latest Ubuntu and has the following packages in
 * yarn
 * yeoman with generator-nitro
 
-## Folder structure
-```
-/
-├── home/namics
-│   ├── node_modules --> node modules for the application
-│   ├── app --> nitro 'app' folder
-│   ├── config --> nitro 'config' folder
-│   ├── tests --> nitro 'tests' folder
-│   ├── gulp --> nitro 'gulp' folder
-│   ├── projects --> nitro 'projetcs' folder
-│   ├── src --> folder for the develop
-│   ├── public --> folder for the assets
-│   └── package.json --> DevDependencies for the applicaton
-```
-## Summary
-During buildtime all needed folders of the nitro generator are copied in the container itself. The main purpose for the container should be, to set the enivornment for the developers. The architecture for the application and all needed files for builing and developing the application should be in it. The Developer is not responsible for the environment but the container should give them the opportunity to develop the application. 
+## Nitro Files
+During Buildtime of the image, all needed files for nitro are copied into the container. This means that, when the developing System is started all needed files for the development are into it. It's not necessary to install any dependencies for the project or to run any commands like ```npm install```, becaus the container is shipped ready and prepared for the development.
 
-## Docker-compose
-To run the container the docker-compose helper is used. This file maps all folders for the development and expose all needed ports.
+## Package.json files
+The package.json file into the nitro folder, should have a list with all dependencies of the project.
 
-# Start developing
-The structure of the project is organized as following:
-```
-project-folder/
-├── .
-│   ├── nitro --> All nitro files
-│   └── project --> All development files
-```
-In the folder named 'project', all files for the application should be placed in. When the container starts, it runs the command ```npm run dev```, which watches all the files in this folder.
+The package.json file into the ```project``` folder, should only include the run-scripts for the npm environment.
 
-When all needed files are in in it, the following command can be used to starts the system:
+## Docker compose
+To run a Docker container instance of this image, the docker-compose helper is used. What the developers needs for the project, are exposed ports and a special folder to mount the sourcecode directory in the developers local machine. 
 
-```
-docker-compose up
-```
+## Folder mount
+![Folder mount](./documentation/folder_mapping.png "Docker Host / Local developer machine")
+
+## Run the environment
+To run the environemnt, the developer should onyl run the ```docker-comose up``` command. This runs a new instance of the docker image and starts all watchers and needed processes for the development. When a new container is started the command ```npm run dev``` as entrypoint is called. 
