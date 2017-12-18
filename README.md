@@ -56,3 +56,6 @@ To run a Docker container instance of this image, the docker-compose helper is u
 
 ## Run the environment
 To run the environemnt, the developer should onyl run the ```docker-comose up``` command. This runs a new instance of the docker image and starts all watchers and needed processes for the development. When a new container is started the command ```npm run dev``` as entrypoint is called. 
+
+# Further Step
+Next step of this project is to analyze how to integrate this environment into backend technologies, like AEM, magnolia, etc.
