@@ -7,15 +7,15 @@ Before we start to describe the purpose and all things about this project, it's 
 ![Project Roles](./documentation/roles.png "Roles")
 
 ## Architect
-In my opinion the Software architect has the responsability to determine the technologies and to design the architecture of the Software. This means that the architect has the responsibility to create the Docker container for the project. Following the procedure of the architect is described:
+In my opinion the Software architect has the responsability to determine the technologies and to design the architecture of the Software. This means that the architect has the responsibility to create the Docker container for the project.
 
 1. Generate the project with the yeoman nitro-generator.
 2. Divide the the Nitro folders, from the sourcecode folders.
-2.1 Copy the Nitro stuff into the ```nitro```folder.
+2.1 Copy the Nitro stuff into the ```nitro``` folder.
 3. Give the developers the opportunity to work. E.g: Mount folders, etc.
 
 ## Developer
-The Developer has only the responsability to develop the Software. The Developer do not worry about how the architecture was built. The most important thing is that, he / she knows the structure of the architecture and how to work with it. The developers binds the folder of the sourcecode with the folders in the docker container.
+The Developer has only the responsability to watch on the sourcecode. The Developer do not worry about how the architecture was built. The most important thing is that, he / she knows the structure of the architecture and how to work with it. The developers binds the folder of the sourcecode with the folders in the docker container.
 
 # Folder structure
 This project has a special folder structure, which was created to optimize the work from the architect. 
@@ -25,11 +25,10 @@ project-folder/
 │   ..
 │   ├── nitro --> Nitro stuff
 │   ├── project --> Sourcecode folder for the developers
-│   ├── config --> nitro 'config' folder
 │   ├── Docker-compose.yml --> Docker-compose file for run/build docker
 │   ├── Dockerfile --> Dockerfile which describe the Docker image
 ```
-How described in the previous section, the architect generates a project with the nitro-generator. This Nitro files are copied in the ```nitro``` folder and copied during buildtime into the docker-container.
+How described in the previous section, the architect generates a project with the nitro-generator. This Nitro files are copied into the ```nitro``` folder and copied during buildtime within the docker-container.
 
 # Docker Image
 ## Packages
@@ -42,7 +41,7 @@ The Docker Image is based on the latest Ubuntu and has the following packages in
 * yeoman with generator-nitro
 
 ## Nitro Files
-During Buildtime of the image, all needed files for nitro are copied into the container. This means that, when the developing System is started all needed files for the development are into it. It's not necessary to install any dependencies for the project or to run any commands like ```npm install```, becaus the container is shipped ready and prepared for the development.
+During Buildtime of the image, all needed files for nitro are copied into the container. This means that, when the developing System is started all needed files for the development are into it. It's not necessary to install any dependencies for the project or to run any commands like ```npm install```, because the container is shipped ready and prepared for the development.
 
 ## Package.json files
 The package.json file into the nitro folder, should have a list with all dependencies of the project.
